@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <!-- ENV DEBUG: [{{ jekyll.environment }}] -->
-
-  {% if jekyll.environment == "development" %}
-    <!-- testing environment conditional -->
-    <meta name="robots" content="noindex, nofollow">
-  {% endif %}
+  <!-- ENV DEBUG: [{{ jekyll.environment }}] -->
 
   <!-- ENV DEBUG: [{{ site.github.repository_name }}] -->
   {% if site.github.repository_name == "horizonsound-dev" %}
     <!-- dev-only -->
+    <meta name="robots" content="noindex, nofollow">
   {% endif %}
 
   <meta charset="UTF-8" />
