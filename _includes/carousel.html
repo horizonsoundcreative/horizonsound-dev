@@ -1,0 +1,58 @@
+{% assign items = include.playlist | default: include.songs %}
+
+{% if site.debug %}
+<div class="debug-block">
+  <pre style="background:#111; color:#0ff; padding:1rem; white-space:pre-wrap;">
+
+CAROUSEL DEBUG
+==============================
+
+include.playlist: {{ include.playlist | jsonify }}
+include.songs:    {{ include.songs | jsonify }}
+
+MODE DETECTED:
+{% if include.playlist %}
+  PLAYLIST MODE (div tiles)
+{% else %}
+  SONG MODE (a tiles)
+{% endif %}
+
+ITEMS (titles + URLs):
+{% for item in items %}
+  - title: {{ item.title }}
+    url:   {{ item.url }}
+{% endfor %}
+
+  </pre>
+</div>
+{% endif %}
+
+<div class="carousel" data-carousel>
+
+  <!-- LEFT ARROW -->
+  <button class="carousel-arrow left-arrow" data-arrow="left">‹</button>
+
+  <div class="horizontal-strip" data-strip>
+    {% assign items = include.playlist | default: include.songs %}
+    {% for song in items %}
+      {% if song.videostatus == "Public" %}
+        <a class="carousel-tile" data-song="{{ song.song_id }}" href="{{ song.url }}">
+          <img src="{{ song.image }}" alt="{{ song.title }}">
+          <h3 class="tile-title">{{ song.title }}</h3>
+        </a>
+      {% endif %}
+    {% endfor %}
+    {% for song in items %}
+      {% unless song.videostatus == "Public" %}
+        <div class="carousel-tile coming-soon" data-song="{{ song.song_id }}">
+          <img src="{{ song.image }}" alt="{{ song.title }}">
+          <div class="tile-overlay">Coming Soon</div>
+          <h3 class="tile-title">{{ song.title }}</h3>
+        </div>
+      {% endunless %}
+    {% endfor %}
+  </div>
+  <!-- RIGHT ARROW -->
+  <button class="carousel-arrow right-arrow" data-arrow="right">›</button>
+
+</div>
