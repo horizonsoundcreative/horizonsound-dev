@@ -7,8 +7,11 @@
     <!-- testing environment conditional -->
     <meta name="robots" content="noindex, nofollow">
   {% endif %}
-  
-  <!-- test1234 -->
+
+  <!-- ENV DEBUG: [{{ site.github.repository_name }}] -->
+  {% if site.github.repository_name == "horizonsound-dev" %}
+    <!-- dev-only -->
+  {% endif %}
 
   <meta charset="UTF-8" />
   <title>{{ page.title }}</title>
